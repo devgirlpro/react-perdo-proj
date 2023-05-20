@@ -1,35 +1,52 @@
 import "./App.css";
+import { User } from "./User";
+import { Job } from "./Jobs";
 
 //user component
-const UserCompo = (props) => {
-    return (
-        <div>
-            <h2>name: {props.name}</h2>
-            <h3>age: {props.age}</h3>
-            <h4>email: {props.email}</h4>
-        </div>
-    );
-};
 
 //job component
-const Job = (props) => {
-    return (
-        <div>
-            <h2>salary: {props.salary}</h2>
-            <h3>position: {props.position}</h3>
-            <h4>company: {props.company}</h4>
-        </div>
-    );
-};
 
 function App() {
+    let isGreen = false;
+    let isBlue = true;
+    const planets = [
+        { name: "Marse", isGasPlanet: false },
+        { name: "Earth", isGasPlanet: false },
+        { name: "Jupiter", isGasPlanet: true },
+        { name: "Venus", isGasPlanet: false },
+        { name: "Neptune", isGasPlanet: true },
+        { name: "Uranus", isGasPlanet: true },
+    ];
+
     return (
         <div className="App">
-            <h2>React proj pedro</h2>
-            <UserCompo name="pedro" age={23} email="pedro@pedro.com" />
+            <h2 style={{ color: isGreen ? "green" : "pink" }}>
+                React proj pedro
+            </h2>
+            <h2 style={{ color: isBlue ? "blue" : "pink" }}>pink-blue text</h2>
+
+            {/* {planets.map((planet, key) => {
+                return planet.isGasPlanet ? (
+                    <h2 key={key}>{planet.name}</h2>
+                ) : (
+                    <h2 key={key}>{planet.name} is not GasPlanet</h2>
+                );
+            })} */}
+            {/* {planets.map((planet, key) => {
+                if (planet.isGasPlanet) {
+                    return <h1 key={key}>{planet.name}</h1>;
+                }
+            })} */}
+
+            {planets.map(
+                (planet, key) =>
+                    planet.isGasPlanet && <h2 key={key}>{planet.name}</h2>
+            )}
+
+            <User name="pedro" age={23} email="pedro@pedro.com" />
             <Job salary={5500} position="senior" company="Amazon" />
             <br />
-            <UserCompo name="zi" age={32} email="zi@zi.com" />
+            <User name="zi" age={32} email="zi@zi.com" />
             <Job salary={2500} position="junior" company="newName" />
         </div>
     );
