@@ -1,12 +1,14 @@
 import "./App.css";
 import { User } from "./User";
 import { Job } from "./Jobs";
-
-//user component
-
-//job component
+import { useState } from "react";
 
 function App() {
+    const [count, setCount] = useState(0);
+    const [showText, setShowText] = useState(true);
+    const [showPlanets, setShowPlanets] = useState(true);
+    const [planetsColor, setPlanetsColor] = useState("blue");
+
     let isGreen = false;
     let isBlue = true;
     const planets = [
@@ -18,31 +20,62 @@ function App() {
         { name: "Uranus", isGasPlanet: true },
     ];
 
+    const IncreaseAge = () => {
+        setCount(count + 1);
+    };
+
+    const DecreaseAge = () => {
+        setCount(count - 1);
+    };
+
+    const setToZero = () => {
+      setCount(0)
+    }
+
+    const ToggleText = () => {
+        setShowText(!showText);
+    };
+
+    const TogglePlanets = () => {
+        setShowPlanets(!showPlanets);
+    };
+
+    const TooglePlanetColor = () => {
+        setPlanetsColor(planetsColor === "blue" ? "red" : "blue");
+    };
+
     return (
         <div className="App">
-            <h2 style={{ color: isGreen ? "green" : "pink" }}>
-                React proj pedro
-            </h2>
-            <h2 style={{ color: isBlue ? "blue" : "pink" }}>pink-blue text</h2>
-
-            {/* {planets.map((planet, key) => {
-                return planet.isGasPlanet ? (
-                    <h2 key={key}>{planet.name}</h2>
-                ) : (
-                    <h2 key={key}>{planet.name} is not GasPlanet</h2>
-                );
-            })} */}
-            {/* {planets.map((planet, key) => {
-                if (planet.isGasPlanet) {
-                    return <h1 key={key}>{planet.name}</h1>;
-                }
-            })} */}
-
-            {planets.map(
-                (planet, key) =>
-                    planet.isGasPlanet && <h2 key={key}>{planet.name}</h2>
+            <button onClick={ToggleText}>Show/Hide text</button>
+            {showText && (
+                <>
+                    <h2 style={{ color: isGreen ? "green" : "pink" }}>
+                        React proj pedro
+                    </h2>
+                    <h2 style={{ color: isBlue ? "blue" : "pink" }}>
+                        pink-blue text
+                    </h2>
+                </>
             )}
-
+            <h2>{count}</h2>
+            <button onClick={IncreaseAge}>Increase age</button>
+            <button onClick={DecreaseAge}>Decrease Age</button>
+            <button onClick={setToZero} >set to zero</button>
+            <br />
+            <hr />
+            <button onClick={TogglePlanets}>show/Hide gasPlanets</button>
+            {showPlanets &&
+                planets.map(
+                    (planet, key) =>
+                        planet.isGasPlanet && (
+                            <>
+                                <h2 key={key} style={{ color: planetsColor }}>
+                                    {planet.name}
+                                </h2>
+                            </>
+                        )
+                )}{" "}
+            <button onClick={TooglePlanetColor}>change planetscolor</button>
             <User name="pedro" age={23} email="pedro@pedro.com" />
             <Job salary={5500} position="senior" company="Amazon" />
             <br />
