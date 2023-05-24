@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import { Task } from "./Task";
 
 function App() {
     const [todoList, setTodoList] = useState([]);
@@ -9,6 +10,18 @@ function App() {
         setNewTask(event.target.value);
     };
 
+    const completetask = (taskId) => {
+      setTodoList(
+        todoList.map((task) => {
+          if (task.id === taskId) {
+            return {...task, completed: true}
+          } else {
+            return task
+          }
+        })
+      )
+    };
+    
     const addTask = () => {
         const task = {
             id:
@@ -16,16 +29,18 @@ function App() {
                     ? 1
                     : todoList[todoList.length - 1].id + 1,
             taskName: newTask,
+            completed: false,
         };
         setTodoList([...todoList, task]);
         console.log("todoList ==>", todoList);
     };
 
-    const deletTask = (taskId) => {
+    const deleteTask = (taskId) => {
         const newTodoList = todoList.filter((task) => {
             return task.id !== taskId;
         });
         setTodoList(newTodoList);
+        // setTodoList(todoList.filter((task) => task.id !== taskId));
     };
 
     return (
@@ -35,16 +50,15 @@ function App() {
                 <button onClick={addTask}>Add TAsk</button>
             </div>
             <div className="list">
-                {todoList.map((task, key) => {
+                {todoList.map((task) => {
                     return (
-                        <div key={key}>
-                            <h2>
-                                {task.taskName} <br />
-                                <button onClick={() => deletTask(task.id)}>
-                                    XXX
-                                </button>
-                            </h2>
-                        </div>
+                        <Task
+                            taskName={task.taskName}
+                            id={task.id}
+                            deleteTask={deleteTask}
+                            completed={task.completed}
+                            completetask={completetask}
+                        />
                     );
                 })}
             </div>
