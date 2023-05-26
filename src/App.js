@@ -1,33 +1,44 @@
 import "./App.css";
 import axios from "axios";
-import Axios from "axios";
-import async from "hbs/lib/async";
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 
 function App() {
-    const [inputName, setInputName] = useState("");
-    const [predictedInfo, setPredictedInfo] = useState({});
+    const [partyExcuse, setPartyExcuse] = useState("");
+    const [familyExcuse, setFamilyExcuse] = useState("");
+    const [officeExcuse, setOfficeExcuse] = useState("");
 
-    const fetchData = () => {
-        axios.get(`https://api.agify.io/?name=${inputName}`).then((res) => {
-            console.log(res.data);
-            setPredictedInfo(res.data);
-        });
+    const getExcuse = (excuse) => {
+        axios
+            .get(`https://excuser-three.vercel.app/v1/excuse/${excuse}/`)
+            .then((res) => {
+                console.log(res.data);
+                if (excuse === "party") {
+                    setPartyExcuse(res.data[0].excuse);
+                } else if (excuse === "family") {
+                    setFamilyExcuse(res.data[0].excuse);
+                } else if (excuse === "office") {
+                    setOfficeExcuse(res.data[0].excuse);
+                }
+            });
     };
 
     return (
         <div className="App">
-            <input
-                placeholder="enter a name ..."
-                onChange={(e) => {
-                    setInputName(e.target.value);
-                }}
-            />
-            <button onClick={fetchData}>Predict Age</button>
+            <button onClick={() => getExcuse("party")}>Party</button>
+            <button onClick={() => getExcuse("family")}>Family</button>
+            <button onClick={() => getExcuse("office")}>Office</button>
+
             <div className="prodictedAge ">
-                <h2>input Name: {predictedInfo?.name}</h2>
-                <h3>Predicted age: {predictedInfo?.age}</h3>
-                <h4>count: {predictedInfo?.count}</h4>
+                <h2>
+                    Party Excuse: <p>{partyExcuse}</p>
+                </h2>
+                <h2>
+                    Family Exccuse: <p>{familyExcuse}</p>
+                </h2>
+                <h2>
+                    Office Excuse: <p>{officeExcuse}</p>
+                </h2>
             </div>
         </div>
     );

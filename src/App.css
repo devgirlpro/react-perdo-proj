@@ -22,3 +22,8 @@
     color: rgb(240, 119, 5);
     border: solid 2px rgb(19, 12, 206);
 }
+
+p {
+    color: black;
+    font-size: 24px;
+}
