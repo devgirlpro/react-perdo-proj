@@ -1,12 +1,23 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
+.App {
+  background-color: #bce745;
+  color: blue;
+  font-size: xx-large;
+  font-family: fantasy;
+  font-style: italic;
+  font-weight: bolder;
+}
 
-
+.catFactList {
+    background-color: #f5740b;
+    border: solid 2px red;
+}
