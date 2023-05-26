@@ -9,15 +9,16 @@
 }
 
 .App {
-  background-color: #bce745;
-  color: blue;
-  font-size: xx-large;
-  font-family: fantasy;
-  font-style: italic;
-  font-weight: bolder;
+    background-color: rgb(240, 119, 5);
+    color: rgb(32, 3, 67);
+    font-size: xx-large;
+    font-family: monospace;
+    font-style: italic;
+    font-weight: bolder;
 }
 
-.catFactList {
-    background-color: #f5740b;
-    border: solid 2px red;
+.prodictedAge {
+    background-color: #e9c646;
+    color: rgb(240, 119, 5);
+    border: solid 2px rgb(19, 12, 206);
 }
